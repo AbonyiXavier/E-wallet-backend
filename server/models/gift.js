@@ -1,25 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
-  const Transaction = sequelize.define('Transactions', {
+  const Gift = sequelize.define('Gifts', {
     amount: {
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
-    reference: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    status: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   });
 
-  Transaction.associate = (models) => {
-    Transaction.belongsTo(models.Users, {
+  Gift.associate = (models) => {
+    Gift.belongsTo(models.Users, {
       foreignKey: {
         allowNull: false,
       },
     });
   };
-  return Transaction;
+  return Gift;
 };

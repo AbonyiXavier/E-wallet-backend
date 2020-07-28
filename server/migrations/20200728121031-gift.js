@@ -11,7 +11,7 @@ module.exports = {
 
       Example:
       */
-    return queryInterface.createTable('Transactions', {
+    return queryInterface.createTable('Gifts', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -21,13 +21,27 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false,
       },
-      reference: {
+      description: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      status: {
-        type: Sequelize.STRING,
+      senderId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+      },
+      receiverId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -36,15 +50,6 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        allowNull: false,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
       },
     });
   },
@@ -56,6 +61,6 @@ module.exports = {
 
       Example:
       */
-    return queryInterface.dropTable('Transactions');
+    return queryInterface.dropTable('Gifts');
   },
 };

@@ -3,20 +3,20 @@ import model from '../models';
 
 export default {
   addBalance: async (req, res) => {
-    // console.log('user', req.user);
-    // console.log('userId', req.user.user.id);
+    console.log('user', req.user);
+    console.log('userId', req.user.user.id);
     try {
       const data = await model.Accounts.create({
-        balance: parseInt(req.body.balance),
+        balance: parseFloat(req.body.balance),
         UserId: req.user.user.id,
       });
       console.log('data', data);
-      return res.send({
-        data,
-        message: 'The operation was successful',
-      });
+      // return res.send({
+      //   data,
+      //   message: 'The operation was successful',
+      // });
     } catch (error) {
-      //   console.log(error);
+      console.log('error', error);
     }
   },
 
@@ -45,7 +45,7 @@ export default {
           UserId: req.user.user.id,
         },
       });
-      //   console.log('balance', data);
+      console.log('balance', data);
       const { balance } = req.body;
       const formatedBalance =
         parseInt(data.dataValues.balance) + parseInt(balance);

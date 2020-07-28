@@ -6,7 +6,7 @@ export default {
   getAllUsers: async (req, res) => {
     try {
       const data = await model.Users.findAll({
-        include: [model.Accounts],
+        include: [model.Accounts, model.Profiles],
       });
       return res.send({
         data,

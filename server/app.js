@@ -1,6 +1,5 @@
 import createError from 'http-errors';
 import express from 'express';
-import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
@@ -11,11 +10,11 @@ import forgetPassword from './controllers/forgetPassword';
 import resetPassword from './controllers/resetPassword';
 import accountRoute from './routes/account';
 import getUsersRoute from './routes/getusers';
+import transactionRoute from './routes/transaction';
+import profileRoute from './routes/profile';
+import giftRoute from './routes/gift';
 
 const app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
 
 app.use(helmet());
 app.use(cors());
@@ -23,7 +22,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
 require('dotenv').config();
 
 app.post('/api/signup', signUp);
@@ -33,6 +32,9 @@ app.post('/resetpasstoken/:id-:token', resetPassword);
 
 app.use('/api', accountRoute);
 app.use('/api', getUsersRoute);
+app.use('/api', transactionRoute);
+app.use('/api', profileRoute);
+app.use('/api', giftRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -44,10 +46,6 @@ app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
 });
 
 const PORT = process.env.PORT || 5000;
