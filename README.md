@@ -6,7 +6,7 @@ E-wallet allow customers to pre-load their wallet from their Debit cards and tra
 - sign in
 - Change password
 - fund wallet using PAYSTACK API
-- transfer or gift walllet
+- transfer or gift money from walllet
 - user profile
 
 # Getting Started
@@ -63,7 +63,7 @@ You must have
 - Use this url http://localhost:5000/api/paystack/callback
 - A verify payment to update the user balance
 
-### Transfer Wallet
+### Transfer money from Wallet
 
 - Use the POST method
 - Use this url http://localhost:5000/api/transfer/:accountId
