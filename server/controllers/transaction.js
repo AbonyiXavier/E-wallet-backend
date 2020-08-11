@@ -6,11 +6,11 @@ export default {
     try {
       console.log('user', req.user.user.email);
       const { amount } = req.body;
-      if (parseInt(amount) < 50) {
+      if (parseFloat(amount) < 50) {
         console.log('fund your wallet with at least ₦50.');
       }
       const paystack_data = {
-        amount: parseInt(amount) * 100,
+        amount: parseFloat(amount) * 100,
         email: req.user.user.email,
       };
 
@@ -18,8 +18,9 @@ export default {
 
       const transation_payload = {
         UserId: req.user.user.id,
-        amount: parseInt(amount),
+        amount: parseFloat(amount),
         reference: response.data.reference,
+        status: 'pending',
       };
 
       await model.Transactions.create(transation_payload);
@@ -49,31 +50,29 @@ export default {
       const accountDetails = await model.Accounts.findOne({
         where: { userId },
       });
-      const { balance, id: accountId } = accountDetails.dataValues;
-      const newBalance = parseFloat(balance) + amount;
+      const { balance } = accountDetails.dataValues;
+      const amt = amount / 100;
+      const newBalance = parseFloat(balance) + amt;
 
-      await Promise.all([
-        model.Transactions.update(
-          {
-            status,
-            reference,
-            amount,
+      await model.Transactions.create({
+        UserId: userId,
+        status,
+        reference,
+        amount: amt,
+      });
+      await model.Accounts.update(
+        {
+          balance: newBalance,
+        },
+        {
+          where: {
+            userId,
           },
-          {
-            where: { userId },
-          }
-        ),
-        model.Accounts.update(
-          {
-            balance: newBalance,
-          },
-          {
-            where: {
-              userId,
-            },
-          }
-        ),
-      ]);
+        }
+      );
+      return res.json({
+        message: 'Account funded successfully',
+      });
     } catch (error) {
       console.log('error', error);
     }

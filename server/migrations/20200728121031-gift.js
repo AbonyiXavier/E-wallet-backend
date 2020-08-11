@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      senderId: {
+      userId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         allowNull: false,
@@ -34,12 +34,12 @@ module.exports = {
           key: 'id',
         },
       },
-      receiverId: {
+      accountId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         allowNull: false,
         references: {
-          model: 'Users',
+          model: 'Accounts',
           key: 'id',
         },
       },

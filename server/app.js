@@ -12,7 +12,7 @@ import accountRoute from './routes/account';
 import getUsersRoute from './routes/getusers';
 import transactionRoute from './routes/transaction';
 import profileRoute from './routes/profile';
-// import giftRoute from './routes/gift';
+import giftRoute from './routes/gift';
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.use('/api', accountRoute);
 app.use('/api', getUsersRoute);
 app.use('/api', transactionRoute);
 app.use('/api', profileRoute);
-// app.use('/api', giftRoute);
+app.use('/api', giftRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
+    Gift.belongsTo(models.Accounts, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
   };
   return Gift;
 };

@@ -44,6 +44,13 @@ const signUp = async (req, res) => {
       wallet_id: userData.wallet_id,
     };
     data.token = token;
+
+    const balance = 0;
+    await model.Accounts.create({
+      balance: parseFloat(balance),
+      UserId: data.id,
+    });
+    console.log('data', data);
     res.cookie('token', token);
     res.header('Authorization', token).status(200).send({
       data,
