@@ -4,9 +4,9 @@ E-wallet allow customers to pre-load their wallet from their Debit cards and tra
 
 - sign up
 - sign in
-- Reset password
-- add user balance
+- Change password
 - fund wallet using PAYSTACK API
+- transfer or gift walllet
 - user profile
 
 # Getting Started
@@ -45,6 +45,8 @@ You must have
 - Use the POST method
 - Use this url http://localhost:5000/api/signup
 
+- As user get signup automatically the balance is Zero
+
 ### Reset password
 
 - Use the POST method
@@ -60,6 +62,11 @@ You must have
 - Use the GET method
 - Use this url http://localhost:5000/api/paystack/callback
 - A verify payment to update the user balance
+
+### Transfer Wallet
+
+- Use the POST method
+- Use this url http://localhost:5000/api/transfer/:accountId
 
 ### User profile
 
