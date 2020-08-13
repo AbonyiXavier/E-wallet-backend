@@ -24,7 +24,12 @@ export default {
       };
 
       await model.Transactions.create(transation_payload);
-      if (response) console.log(response.data.authorization_url);
+      if (response) {
+        return res.json({
+          message: response.data.authorization_url,
+        });
+      }
+      console.log(response.data.authorization_url);
     } catch (error) {
       console.log(error);
     }

@@ -12,6 +12,9 @@ export default {
       });
       if (!user) {
         console.log('No user found');
+        return res.json({
+          message: 'No user found',
+        });
       }
       // Get user balance
       const accountDetails = await model.Accounts.findOne({
@@ -33,7 +36,7 @@ export default {
       console.log('amt', amt);
       console.log('amount', amount);
       console.log('newBalanc', newBalance);
-      await model.Accounts.update(
+      const update = await model.Accounts.update(
         {
           balance: newBalance,
         },
@@ -43,7 +46,7 @@ export default {
           },
         }
       );
-      console.log('name', azeez);
+      console.log('update', update);
 
       const reciever = await model.Users.findOne({
         where: {
@@ -63,10 +66,10 @@ export default {
       console.log('amount', money);
 
       const newBal = money + parseFloat(amount);
-      console.log('amt', money);
-      console.log('amount', amount);
       console.log('newBal', newBal);
-      await model.Accounts.update(
+      console.log('amount', amount);
+      console.log('amt', money);
+      const secondUpdate = await model.Accounts.update(
         {
           balance: newBal,
         },
@@ -76,6 +79,7 @@ export default {
           },
         }
       );
+      console.log('second', secondUpdate);
       const data = {
         UserId: userId,
         AccountId: +accountId,
@@ -84,6 +88,10 @@ export default {
       };
       console.log('data', data);
       await model.Gifts.create(data);
+      return res.json({
+        data,
+        message: 'Gift transfer sucessfully',
+      });
     } catch (error) {
       console.log('error', error);
     }

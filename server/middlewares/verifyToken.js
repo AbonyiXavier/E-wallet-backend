@@ -10,7 +10,7 @@ const verifyToken = async (req, res, next) => {
       return res.status(401).json('Access Denied');
     }
     const decoded = await jwt.verify(token, process.env.TOKEN_SECRET);
-    res.send(decoded.id);
+    // res.send(decoded.id);
     req.user = decoded;
     next();
   } catch (error) {

@@ -3,19 +3,13 @@ import model from '../models';
 export default {
   getBalance: async (req, res) => {
     try {
-      const data = await model.Accounts.findOne({
-        where: {
-          UserId: req.user.user.id,
-        },
-      });
-      //   console.log('balance', data);
-      console.log('xavier', data.dataValues.balance);
+      const data = await model.Accounts.findAll();
       return res.send({
         data,
         message: 'List of all Users',
       });
     } catch (error) {
-      //   console.log(error);
+      console.log(error);
     }
   },
 
