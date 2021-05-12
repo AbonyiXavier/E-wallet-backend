@@ -37,7 +37,7 @@
     "multer-s3": "^2.9.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
-    "nodemailer": "^6.4.6",
+    "nodemailer": "^6.4.16",
     "random-int": "^2.0.1",
     "request": "^2.88.2",
     "sequelize": "^5.21.7",
